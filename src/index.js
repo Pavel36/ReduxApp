@@ -6,9 +6,12 @@ import { reducer } from './reducer';
 
 const store = createStore(reducer);
 const {dispatch} = store;
-const incDispacth = () => dispatch(inc());
-const decDispacth = () => dispatch(dec());
-const rndDispacth = (value) => dispatch(rnd(value));
+const bindActionCreator = (creator, dispatch) => (args) =>{
+    dispatch(creator(args));
+}
+const incDispacth = bindActionCreator(inc, dispatch);
+const decDispacth = bindActionCreator(dec, dispatch);
+const rndDispacth = bindActionCreator(rnd, dispatch);
 
 document.getElementById('inc').addEventListener('click', incDispacth);
 document.getElementById('dec').addEventListener('click', decDispacth);
